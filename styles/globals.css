@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-brand-light-purple;
+  }
+}
+
+
 html,
 body {
   padding: 0;
