@@ -2,13 +2,13 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { useAccount, useConnect, useDisconnect, useEnsName, useEnsAvatar } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Disclosure } from '@headlessui/react'
 import { LinkIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const navigation = [
-    { name: 'Forum', href: '#', current: false },
-    { name: 'Documentation', href: '#', current: false },
-    { name: 'Snapshot', href: '#', current: false },
+    { name: 'Forum', href: 'https://gov.apwine.fi/', current: false },
+    { name: 'Documentation', href: 'https://docs.apwine.fi/', current: false },
+    { name: 'Snapshot', href: 'https://snapshot.org/#/apwine.eth', current: false },
 ]
 
 function classNames(...classes) {
@@ -17,7 +17,6 @@ function classNames(...classes) {
 
 export default function Navigation() {
     const { data: account } = useAccount()
-    const { data: ensAvatar } = useEnsAvatar({ addressOrName: account?.address })
     const { data: ensName } = useEnsName({ address: account?.address })
     const { connect, error, isConnecting, pendingConnector } = useConnect({
         connector: new InjectedConnector(),
@@ -32,7 +31,6 @@ export default function Navigation() {
                     <div className="mx-auto px-2 md:px-6 lg:px-8">
                         <div className="relative flex items-center justify-between h-16">
                             <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
-                                {/* Mobile menu button*/}
                                 <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                                     <span className="sr-only">Open main menu</span>
                                     {open ? (
@@ -57,6 +55,8 @@ export default function Navigation() {
                                             <a
                                                 key={item.name}
                                                 href={item.href}
+                                                target="_blank"
+                                                rel="noreferrer"
                                                 className="text-brand-purple hover:text-brand-indigo"
                                                 aria-current={item.current ? 'page' : undefined}
                                             >

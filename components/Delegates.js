@@ -6,7 +6,6 @@ import { faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 export default function Delegates({ delegates }) {
     return (
-        // <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <ul role="list" className={delegates.length > 1 ? "grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3" : "w-72"}>
             {delegates.map((person) => (
                 <li

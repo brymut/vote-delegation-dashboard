@@ -3,9 +3,9 @@ import { faDiscord, faTwitter, faGithub, faTelegram, faMedium } from '@fortaweso
 
 const navigation = {
     main: [
-        { name: 'Forum', href: '#' },
-        { name: 'Documentation', href: '#' },
-        { name: 'Snapshot', href: '#' },
+        { name: 'Forum', href: 'https://gov.apwine.fi/', current: false },
+        { name: 'Documentation', href: 'https://docs.apwine.fi/', current: false },
+        { name: 'Snapshot', href: 'https://snapshot.org/#/apwine.eth', current: false },
     ],
 }
 
@@ -16,7 +16,7 @@ export default function Footer() {
                 <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
                     {navigation.main.map((item) => (
                         <div key={item.name} className="px-5 py-2">
-                            <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
+                            <a href={item.href} target="_blank" rel="noreferrer" className="text-base text-gray-500 hover:text-gray-900">
                                 {item.name}
                             </a>
                         </div>
