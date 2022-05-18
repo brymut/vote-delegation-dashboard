@@ -39,8 +39,9 @@ export default function Home() {
     '0x9824697F7c12CAbAda9b57842060931c48dEA969',
     '0xb91bCC46BAA68F61D8D988898D8D3900BF7A364D'
   ];
+  const zeroAdddress = '0x0000000000000000000000000000000000000000'
   const [votes, setVotes] = useState()
-  const [currentDelegate, setCurrentDelegate] = useState('0x0000000000000000000000000000000000000000')
+  const [currentDelegate, setCurrentDelegate] = useState(zeroAdddress)
 
   useEffect(() => {
     snapshot.utils.getScores(
@@ -57,6 +58,7 @@ export default function Home() {
 
   //get current delegate
 
+
   const { data: selectedDelegate } = useContractRead(
     {
       addressOrName: '0x469788fE6E9E9681C6ebF3bF78e7Fd26Fc015446',
@@ -65,14 +67,14 @@ export default function Home() {
     'delegation',
     {
       // args: ['0x3625eff632eab044489a46014dd168ccb5112240', '0x6c69646f2d736e617073686f742e657468000000000000000000000000000000']
-      args: [account.address, '0x6c69646f2d736e617073686f742e657468000000000000000000000000000000']
+      args: [account?.address, '0x6c69646f2d736e617073686f742e657468000000000000000000000000000000']
 
     }
   )
 
   useEffect(() => {
-    if (selectedDelegate === '0x0000000000000000000000000000000000000000') {
-      setCurrentDelegate('0x0000000000000000000000000000000000000000')
+    if (selectedDelegate === zeroAdddress) {
+      setCurrentDelegate(zeroAdddress)
     } else {
       const filteredFromDelegates = delegates.filter(delegate => delegate.address === selectedDelegate);
       if (filteredFromDelegates.length === 0) {
@@ -119,7 +121,7 @@ export default function Home() {
       </div>
       <div className="mt-11 ml-5 md:ml-16 lg:flex">
         {/* current delegate */}
-        {currentDelegate === '0x0000000000000000000000000000000000000000' ? (null) : (
+        {currentDelegate === zeroAdddress ? (null) : (
           <div >
           <h2 className="font-serif font-bold text-3xl text-brand-indigo">Current Delegate:</h2>
             <div className="mt-5 ml-5 md:ml-10">
@@ -130,7 +132,7 @@ export default function Home() {
         }
 
         {/* select delegate by address */}
-        <div className={`mt-11 md:mt-0 ${currentDelegate === '0x0000000000000000000000000000000000000000' ? '' : 'md:ml-48'}`}>
+        <div className={`mt-11 md:mt-0 ${currentDelegate === zeroAdddress ? '' : 'md:ml-48'}`}>
           <h2 className="font-serif font-bold text-3xl text-brand-indigo">Select Delegate by Address:</h2>
           <div className="mt-2 md:mt-5 md:ml-12">
             <AddressInput />
