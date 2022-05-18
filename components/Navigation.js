@@ -25,7 +25,7 @@ export default function Navigation() {
     const [showDisconnectText, setShowDisconnectText] = useState(false)
 
     return (
-        <Disclosure as="nav" className="bg-white/50 mx-20 my-8 rounded-xl">
+        <Disclosure as="nav" className="bg-white/50 mx-10 md:mx-20 my-8 rounded-xl">
             {({ open }) => (
                 <>
                     <div className="mx-auto px-2 md:px-6 lg:px-8">
