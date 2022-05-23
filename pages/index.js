@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import Navigation from '../components/Navigation'
-import Delegates from '../components/Delegates'
+import Delegate from '../components/Delegate'
 import AddressInput from '../components/AddressInput'
 import Footer from '../components/Footer'
 import { useBalance, useAccount, useBlockNumber, useContractRead } from 'wagmi'
 import snapshot from '@snapshot-labs/snapshot.js';
+import { formatBytes32String } from '@ethersproject/strings'
 import { useState, useEffect } from 'react'
 import delegateAbi from '../utils/abis/delegate.json'
 import { delegates } from '../delegates'
@@ -44,22 +45,20 @@ export default function Home() {
   const [currentDelegate, setCurrentDelegate] = useState(zeroAdddress)
 
   useEffect(() => {
-    snapshot.utils.getScores(
-      space,
-      strategies,
-      network,
-      voters,
-      blockNumber
-    ).then(scores => {
-      setVotes(scores[0][account?.address] || 0)
-    });
+    if (account)
+      snapshot.utils.getScores(
+        space,
+        strategies,
+        network,
+        voters,
+        blockNumber
+      ).then(scores => {
+        setVotes(scores[0][account?.address] || 0)
+      });
 
   }, [voters, account])
 
-  //get current delegate
-
-
-  const { data: selectedDelegate } = useContractRead(
+  const { data: selectedDelegate, error } = useContractRead(
     {
       addressOrName: '0x469788fE6E9E9681C6ebF3bF78e7Fd26Fc015446',
       contractInterface: delegateAbi,
@@ -67,7 +66,7 @@ export default function Home() {
     'delegation',
     {
       // args: ['0x3625eff632eab044489a46014dd168ccb5112240', '0x6c69646f2d736e617073686f742e657468000000000000000000000000000000']
-      args: [account?.address, '0x6c69646f2d736e617073686f742e657468000000000000000000000000000000']
+      args: [account?.address, formatBytes32String(space)]
 
     }
   )
@@ -77,8 +76,9 @@ export default function Home() {
       setCurrentDelegate(zeroAdddress)
     } else {
       const filteredFromDelegates = delegates.filter(delegate => delegate.address === selectedDelegate);
+      console.log(filteredFromDelegates)
       if (filteredFromDelegates.length === 0) {
-        setCurrentDelegate([
+        setCurrentDelegate(
           {
             name: '',
             address: selectedDelegate,
@@ -88,12 +88,15 @@ export default function Home() {
             imageUrl:
               '',
           },
-        ])
+        )
+      } else {
+        setCurrentDelegate(delegates.filter(delegate => delegate.address === selectedDelegate)[0])
       }
-      setCurrentDelegate(delegates.filter(delegate => delegate.address === selectedDelegate))
     }
   }, [selectedDelegate])
 
+  console.log(currentDelegate)
+  console.log('selected delegate', selectedDelegate)
   return (
     <>
       <Head>
@@ -109,11 +112,11 @@ export default function Home() {
             (
               <span className="text-brand-indigo font-bold">Fetching balance...</span>
             ) : isError ? (
-              <span className="text-brand-indigo font-bold">Error fetch balance</span>
+              <span className="text-brand-indigo font-bold">Error fetching balance</span>
             ) : (
               <>
                 <h3>veAPW balance: <span className="text-brand-indigo font-bold">{data?.formatted} {data?.symbol}</span></h3>
-                <h3>veAPW voting power: <span className="text-brand-indigo font-bold">{votes} votes</span></h3>
+                  <h3>veAPW voting power: <span className="text-brand-indigo font-bold">{votes} votes</span></h3>
               </>
             )
         }
@@ -125,7 +128,7 @@ export default function Home() {
           <div >
           <h2 className="font-serif font-bold text-3xl text-brand-indigo">Current Delegate:</h2>
             <div className="mt-5 ml-5 md:ml-10">
-            <Delegates delegates={currentDelegate} />
+              <Delegate delegate={currentDelegate} />
             </div>
           </div>
         )
@@ -143,7 +146,13 @@ export default function Home() {
       <div className="mt-11 ml-14">
         <h2 className="font-serif font-bold text-3xl text-brand-indigo">Candidate Delegates:</h2>
         <div className="mt-5 mx-20">
-          <Delegates delegates={delegates} />
+          <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {delegates.map((delegate) => (
+              <li key={delegate.id}>
+                <Delegate delegate={delegate} />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <Footer />
