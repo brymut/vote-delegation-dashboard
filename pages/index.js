@@ -11,7 +11,6 @@ import delegateAbi from '../utils/abis/delegate.json'
 import { delegates } from '../delegates'
 
 
-
 export default function Home() {
   const { data: account } = useAccount()
   const { data: blockNumber } = useBlockNumber()
@@ -55,7 +54,6 @@ export default function Home() {
       ).then(scores => {
         setVotes(scores[0][account?.address] || 0)
       });
-
   }, [voters, account])
 
   const { data: selectedDelegate, error } = useContractRead(
@@ -65,7 +63,6 @@ export default function Home() {
     },
     'delegation',
     {
-      // args: ['0x3625eff632eab044489a46014dd168ccb5112240', '0x6c69646f2d736e617073686f742e657468000000000000000000000000000000']
       args: [account?.address, formatBytes32String(space)]
 
     }
@@ -76,7 +73,6 @@ export default function Home() {
       setCurrentDelegate(zeroAdddress)
     } else {
       const filteredFromDelegates = delegates.filter(delegate => delegate.address === selectedDelegate);
-      console.log(filteredFromDelegates)
       if (filteredFromDelegates.length === 0) {
         setCurrentDelegate(
           {
@@ -95,8 +91,6 @@ export default function Home() {
     }
   }, [selectedDelegate])
 
-  console.log(currentDelegate)
-  console.log('selected delegate', selectedDelegate)
   return (
     <>
       <Head>
