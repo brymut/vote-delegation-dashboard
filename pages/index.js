@@ -137,9 +137,9 @@ export default function Home() {
         </div>
       </div>
       {/* Candidate delegates */}
-      <div className="mt-11 ml-14">
+      <div className="mt-11 ml-5 md:ml-14">
         <h2 className="font-serif font-bold text-3xl text-brand-indigo">Candidate Delegates:</h2>
-        <div className="mt-5 mx-20">
+        <div className="mt-5 mx-5 md:mx-20">
           <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
             {delegates.map((delegate) => (
               <li key={delegate.id}>
