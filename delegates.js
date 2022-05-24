@@ -10,7 +10,7 @@ export const delegates = [
   },
   {
     name: 'Jane Cooper',
-    address: '0xE27F2E8321Fb4c32525a4ED86d2902dbA63491E4',
+    address: '0xED26C400D2c4566b5Fe042BC9e807c297Ff3901C',
     bio: 'Went into crypto in 2016. Community builder @ early stage crypto startups. Building the Keep network and tBTC community. Early adopter of Paladin. Believe in what is best for Paladin in the long term and for contributors/community',
     discordId: 'BryanMutai#6546',
     twitter: 'APWineFinance',

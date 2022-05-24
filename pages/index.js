@@ -122,7 +122,7 @@ export default function Home() {
           <div >
           <h2 className="font-serif font-bold text-3xl text-brand-indigo">Current Delegate:</h2>
             <div className="mt-5 ml-5 md:ml-10">
-              <Delegate delegate={currentDelegate} />
+              <Delegate delegate={currentDelegate} currentDelegateAddress={currentDelegate.address} />
             </div>
           </div>
         )
@@ -143,7 +143,7 @@ export default function Home() {
           <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
             {delegates.map((delegate) => (
               <li key={delegate.id}>
-                <Delegate delegate={delegate} />
+                <Delegate delegate={delegate} currentDelegateAddress={currentDelegate.address} />
               </li>
             ))}
           </ul>

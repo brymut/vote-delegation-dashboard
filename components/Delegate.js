@@ -1,11 +1,47 @@
-import { useEnsName, useEnsAvatar } from 'wagmi'
+import { useEnsName, useEnsAvatar, useContractWrite } from 'wagmi'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import Image from 'next/image'
+import { useState, useEffect } from 'react'
+import { formatBytes32String } from '@ethersproject/strings'
 import logoImg from '../public/apw-logo-light-circle.png'
+import delegateAbi from '../utils/abis/delegate.json'
 
 
-export default function Delegate({ delegate }) {
+export default function Delegate({ delegate, currentDelegateAddress }) {
+    const [isCurrentDelegate, setIsCurrentDelegate] = useState(false)
+    const space = 'apwine.eth'
+
+    useEffect(() => {
+        if (delegate.address === currentDelegateAddress) {
+            setIsCurrentDelegate(true)
+        }
+    }, [currentDelegateAddress, delegate])
+
+    const { write: removeDelegate, isLoading: removeDelegateLoading } = useContractWrite(
+        {
+            addressOrName: '0x469788fE6E9E9681C6ebF3bF78e7Fd26Fc015446',
+            contractInterface: delegateAbi,
+        },
+        'clearDelegate',
+        {
+            args: [formatBytes32String(space)]
+
+        }
+    )
+
+    const { write: setDelegate, isLoading: setDelegateLoading } = useContractWrite(
+        {
+            addressOrName: '0x469788fE6E9E9681C6ebF3bF78e7Fd26Fc015446',
+            contractInterface: delegateAbi,
+        },
+        'setDelegate',
+        {
+            args: [formatBytes32String(space), delegate.address]
+
+        }
+    )
+
     const { data: ensAvatar } = useEnsAvatar({
         addressOrName: delegate.address,
     })
@@ -13,7 +49,8 @@ export default function Delegate({ delegate }) {
         address: delegate.address,
     })
     return (
-        <div className='className="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200"'>
+        <div className='flex flex-col max-w-md'>
+            <div className="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200">
             <div className="flex-1 flex flex-col p-8">
                 <div>
                     <Image className="flex-shrink-0 mx-auto rounded-full" src={delegate.imageUrl || ensAvatar || logoImg} width={100} height={100} alt="Delegate Avatar" />
@@ -60,6 +97,24 @@ export default function Delegate({ delegate }) {
                     }
                 </div>
             </div>
+            </div>
+            {isCurrentDelegate ?
+                (
+                    <button
+                        type="button"
+                        onClick={() => removeDelegate()}
+                        className="mt-2 justify-center inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        {removeDelegateLoading ? "Removing Delegate" : "Remove Delegate"}
+                    </button>
+                ) : (
+                    <button
+                        type="button"
+                        onClick={() => setDelegate()}
+                        className="mt-2 justify-center inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        {setDelegateLoading ? "Loading" : "Set Delegate"}
+                    </button>
+                )}
+
         </div>
     )
 }
