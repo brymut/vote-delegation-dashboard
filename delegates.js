@@ -3,10 +3,10 @@ export const delegates = [
     name: 'CoolGuy',
     address: '0xDcdB7cc659462b9602ee2F55333E6619C6EdF2Bb',
     bio: 'I am in charge of DEFI when it comes to the Arizona State University(ASU) DAO which is associated with the Blockchain at ASU club. My ens address is coolguy.asudao.eth. I don’t have a specific voting ethos, but I am very open to discussion and others’ ideas. I have been a very active member of this discourse and the discord. My goal is to work with others to turn APW into the next great DEFI primitive like Curve, AAVE, MAKER, etc…',
-    discordId: 'Cool Guy #0311',
-    twitter: '?',
+    discordId: 'Cool Guy 🍏#0311',
+    twitter: '',
     imageUrl:
-      '?',
+      '',
   },
   {
     name: 'Starny',
@@ -15,7 +15,7 @@ export const delegates = [
     discordId: 'Starny#3390',
     twitter: 'StarnyDefi',
     imageUrl:
-      '?',
+      '',
   },
   {
     name: 'Jane Cooper',
@@ -25,4 +25,5 @@ export const delegates = [
     twitter: 'APWineFinance',
     imageUrl:
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-  },
+  }
+]
