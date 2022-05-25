@@ -9,6 +9,8 @@ const navigation = [
     { name: 'Forum', href: 'https://gov.apwine.fi/', current: false },
     { name: 'Documentation', href: 'https://docs.apwine.fi/', current: false },
     { name: 'Snapshot', href: 'https://snapshot.org/#/apwine.eth', current: false },
+    { name: 'App', href: 'https://apwine.fi', current: false },
+
 ]
 
 function classNames(...classes) {

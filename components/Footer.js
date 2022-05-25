@@ -6,6 +6,7 @@ const navigation = {
         { name: 'Forum', href: 'https://gov.apwine.fi/', current: false },
         { name: 'Documentation', href: 'https://docs.apwine.fi/', current: false },
         { name: 'Snapshot', href: 'https://snapshot.org/#/apwine.eth', current: false },
+        { name: 'App', href: 'https://apwine.fi', current: false },
     ],
 }
 
@@ -23,23 +24,23 @@ export default function Footer() {
                     ))}
                 </nav>
                 <div className="mt-8 flex justify-center space-x-6">
-                    <a key="Discord" href="#" className="text-gray-400 hover:text-gray-500">
+                    <a key="Discord" href="https://t.co/Drdu6DwZT5" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-500">
                         <span className="sr-only">Discord</span>
                         <FontAwesomeIcon className="ml-2" icon={faDiscord} />
                     </a>
-                    <a key="Twitter" href="#" className="text-gray-400 hover:text-gray-500">
+                    <a key="Twitter" href="https://twitter.com/APWineFinance" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-500">
                         <span className="sr-only">Twitter</span>
                         <FontAwesomeIcon className="ml-2" icon={faTwitter} />
                     </a>
-                    <a key="Github" href="#" className="text-gray-400 hover:text-gray-500">
+                    <a key="Github" href="https://github.com/APWine" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-500">
                         <span className="sr-only">Github</span>
                         <FontAwesomeIcon className="ml-2" icon={faGithub} />
                     </a>
-                    <a key="Telegram" href="#" className="text-gray-400 hover:text-gray-500">
+                    <a key="Telegram" href="https://t.co/3F6Xi6dLvt" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-500">
                         <span className="sr-only">Telegram</span>
                         <FontAwesomeIcon className="ml-2" icon={faTelegram} />
                     </a>
-                    <a key="Medium" href="#" className="text-gray-400 hover:text-gray-500">
+                    <a key="Medium" href="https://medium.com/apwine" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-500">
                         <span className="sr-only">Medium</span>
                         <FontAwesomeIcon className="ml-2" icon={faMedium} />
                     </a>
