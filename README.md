@@ -6,9 +6,8 @@
 - Navigate to the delegates.js file in the root of this directory
 - It contains a json object list of the candidates in the following format:
 
-  ```
-  {
-
+```
+{
 name:  'Jane Cooper',
 address:  '0xE27F2E8321Fb4c32525a4ED86d2902dbA63491E4',
 bio:  'Went into crypto in 2016. Community builder @ early stage crypto startups. Building the Keep network and tBTC community. Early adopter of Paladin. Believe in what is best for Paladin in the long term and for contributors/community',
@@ -17,8 +16,7 @@ twitter:  'APWineFinance',
 imageUrl:
 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
 },
-
-  ```
+```
 
 - Add the respective fields (for the twitter field, only add the username without the `@` symbol
 - Commit the changes to the main branch and redeploy to see the changes
