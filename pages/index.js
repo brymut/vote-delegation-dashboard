@@ -94,12 +94,12 @@ export default function Home() {
         <title>APWINE - Voting Delegation Dashboard</title>
       </Head>
       <Navigation />
-      <h1 className="text-2xl md:text-3xl font-bold font-serif mt-11 ml-5  md:ml-16 text-brand-dark-purple">
+      <h1 className="text-xl md:text-2xl font-bold font-serif ml-5  md:ml-16 text-brand-dark-purple">
         Voting Delegation Dashboard
       </h1>
-      <div className="mt-5 ml-5 lg:flex justify-evenly">
+      <div className="mt-5 lg:flex justify-evenly">
         {/* Token balance and voting power */}
-        <div className="mt-11 ml-10 text-brand-dark-purple font-serif font-medium text-xl">
+        <div className="mt-11 text-brand-dark-purple font-serif font-medium text-xl">
         {
           isLoading ?
             (
@@ -108,8 +108,8 @@ export default function Home() {
               <span className="text-brand-indigo font-bold">Error fetching balance</span>
             ) : (
               <>
-                <h3>veAPW balance: <span className="text-brand-indigo font-bold">{data?.formatted} {data?.symbol}</span></h3>
-                    <h3>veAPW voting power: <span className="text-brand-indigo font-bold">{votes} votes</span></h3>
+                    <h3>veAPW balance: <span className="text-brand-indigo font-bold">{parseFloat(data?.formatted).toFixed(2)} {data?.symbol}</span></h3>
+                    <h3>veAPW voting power: <span className="text-brand-indigo font-bold">{parseFloat(votes).toFixed(2)} votes</span></h3>
               </>
             )
         }
@@ -118,7 +118,7 @@ export default function Home() {
         {/* current delegate */}
         {currentDelegate === zeroAdddress ? (null) : (
           <div>
-            <h2 className="mt-5 md:mt-0 font-serif font-bold text-2xl text-brand-indigo">Current Delegate:</h2>
+            <h2 className="mt-5 md:mt-0 font-serif font-bold text-xl text-brand-indigo">Current Delegate:</h2>
             <div className="mt-5 mx-4">
               <Delegate delegate={currentDelegate} currentDelegateAddress={currentDelegate.address} />
             </div>
@@ -128,16 +128,16 @@ export default function Home() {
 
         {/* select delegate by address */}
         <div className={`mt-11 md:mt-0 ${currentDelegate === zeroAdddress ? '' : 'md:ml-12'}`}>
-          <h2 className="font-serif font-bold text-2xl text-brand-indigo">Select Delegate by Address:</h2>
+          <h2 className="font-serif font-bold text-xl text-brand-indigo">Select Delegate by Address:</h2>
           <div className="mt-2 md:mt-5 md:ml-2">
             <AddressInput />
           </div>
         </div>
       </div>
       {/* Candidate delegates */}
-      <div className="mt-11 ml-5 md:ml-14">
-        <h2 className="font-serif font-bold text-2xl text-brand-indigo">Candidate Delegates:</h2>
-        <div className="mt-5 mx-5 md:mx-14">
+      <div className=" mt-6 ml-5 md:ml-14">
+        <h2 className="font-serif font-bold text-xl text-brand-indigo">Candidate Delegates:</h2>
+        <div className="mt-2 mx-5 md:mx-14">
           <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
             {delegates.map((delegate) => (
               <li key={delegate.address}>
