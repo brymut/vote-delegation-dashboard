@@ -35,9 +35,6 @@ export default function Home() {
   const network = '1';
   const voters = [
     account?.address,
-    '0x0edEFA91e99da1eDDD1372c1743A63B1595fC413',
-    '0x9824697F7c12CAbAda9b57842060931c48dEA969',
-    '0xb91bCC46BAA68F61D8D988898D8D3900BF7A364D'
   ];
   const zeroAdddress = '0x0000000000000000000000000000000000000000'
   const [votes, setVotes] = useState()
@@ -56,7 +53,7 @@ export default function Home() {
       });
   }, [voters, account])
 
-  const { data: selectedDelegate, error } = useContractRead(
+  const { data: selectedDelegate } = useContractRead(
     {
       addressOrName: '0x469788fE6E9E9681C6ebF3bF78e7Fd26Fc015446',
       contractInterface: delegateAbi,
@@ -97,10 +94,12 @@ export default function Home() {
         <title>Voting Delegation Dashboard</title>
       </Head>
       <Navigation />
-      <h1 className="text-3xl md:text-5xl font-bold font-serif mt-11 ml-8  md:ml-20 text-brand-dark-purple">
+      <h1 className="text-2xl md:text-3xl font-bold font-serif mt-11 ml-5  md:ml-16 text-brand-dark-purple">
         Voting Delegation Dashboard
       </h1>
-      <div className="mt-11 ml-10 md:ml-24 text-brand-dark-purple font-serif font-medium text-lg">
+      <div className="mt-11 ml-5 lg:flex justify-evenly">
+        {/* Token balance and voting power */}
+        <div className="mt-11 ml-10 text-brand-dark-purple font-serif font-medium text-xl">
         {
           isLoading ?
             (
@@ -110,18 +109,17 @@ export default function Home() {
             ) : (
               <>
                 <h3>veAPW balance: <span className="text-brand-indigo font-bold">{data?.formatted} {data?.symbol}</span></h3>
-                  <h3>veAPW voting power: <span className="text-brand-indigo font-bold">{votes} votes</span></h3>
+                    <h3>veAPW voting power: <span className="text-brand-indigo font-bold">{votes} votes</span></h3>
               </>
             )
         }
 
-      </div>
-      <div className="mt-11 ml-5 md:ml-16 lg:flex">
+        </div>
         {/* current delegate */}
         {currentDelegate === zeroAdddress ? (null) : (
           <div >
-          <h2 className="font-serif font-bold text-3xl text-brand-indigo">Current Delegate:</h2>
-            <div className="mt-5 ml-5 md:ml-10">
+            <h2 className="font-serif font-bold text-2xl text-brand-indigo">Current Delegate:</h2>
+            <div className="mt-5 ml-2">
               <Delegate delegate={currentDelegate} currentDelegateAddress={currentDelegate.address} />
             </div>
           </div>
@@ -129,17 +127,17 @@ export default function Home() {
         }
 
         {/* select delegate by address */}
-        <div className={`mt-11 md:mt-0 ${currentDelegate === zeroAdddress ? '' : 'md:ml-48'}`}>
-          <h2 className="font-serif font-bold text-3xl text-brand-indigo">Select Delegate by Address:</h2>
-          <div className="mt-2 md:mt-5 md:ml-12">
+        <div className={`mt-11 md:mt-0 ${currentDelegate === zeroAdddress ? '' : 'md:ml-12'}`}>
+          <h2 className="font-serif font-bold text-2xl text-brand-indigo">Select Delegate by Address:</h2>
+          <div className="mt-2 md:mt-5 md:ml-2">
             <AddressInput />
           </div>
         </div>
       </div>
       {/* Candidate delegates */}
       <div className="mt-11 ml-5 md:ml-14">
-        <h2 className="font-serif font-bold text-3xl text-brand-indigo">Candidate Delegates:</h2>
-        <div className="mt-5 mx-5 md:mx-20">
+        <h2 className="font-serif font-bold text-2xl text-brand-indigo">Candidate Delegates:</h2>
+        <div className="mt-5 mx-5 md:mx-14">
           <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
             {delegates.map((delegate) => (
               <li key={delegate.id}>
