@@ -4,7 +4,6 @@ import { faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { formatBytes32String } from '@ethersproject/strings'
-import logoImg from '../public/apw-logo-light-circle.png'
 import delegateAbi from '../utils/abis/delegate.json'
 
 
@@ -51,10 +50,14 @@ export default function Delegate({ delegate, currentDelegateAddress }) {
     return (
         <div className='flex flex-col max-w-sm'>
             <div className="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200">
-            <div className="flex-1 flex flex-col p-8">
-                <div>
-                    <Image className="flex-shrink-0 mx-auto rounded-full" src={delegate.imageUrl || ensAvatar || logoImg} width={100} height={100} alt="Delegate Avatar" />
-                </div>
+                <div className="flex-1 flex flex-col p-4">
+                { (delegate.imageUrl || ensAvatar) ? (
+                     <div>
+                        <Image className="flex-shrink-0 mx-auto rounded-full" src={delegate.imageUrl || ensAvatar} width={100} height={100} alt="Delegate Avatar" />
+                     </div>
+                ) : (null)
+                }
+               
                 <h3 className="mt-6 text-gray-900 text-sm font-medium">{delegate.name || ensName}</h3>
                 <dl className="mt-1 flex-grow flex flex-col justify-between">
                     <dt className="sr-only">Address</dt>
@@ -93,7 +96,7 @@ export default function Delegate({ delegate, currentDelegateAddress }) {
                             </div>
                         )
                             :
-                            (null)
+                                (null)
                     }
                 </div>
             </div>
