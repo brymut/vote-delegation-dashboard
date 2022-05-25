@@ -19,6 +19,7 @@ imageUrl:
 ```
 
 - Add the respective fields (for the twitter field, only add the username without the `@` symbol
+- Please leave field empty like this -> `''` if no information available for the field
 - Commit the changes to the main branch and redeploy to see the changes
   
 ## Environment Variables
