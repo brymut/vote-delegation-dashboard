@@ -10,7 +10,7 @@ import delegateAbi from '../utils/abis/delegate.json'
 
 export default function Delegate({ delegate, currentDelegateAddress }) {
     const [isCurrentDelegate, setIsCurrentDelegate] = useState(false)
-    const space = 'apwine.eth'
+    const space = process.env.NEXT_PUBLIC_APWINE_SPACE
 
     useEffect(() => {
         if (delegate.address === currentDelegateAddress) {
@@ -20,7 +20,7 @@ export default function Delegate({ delegate, currentDelegateAddress }) {
 
     const { write: removeDelegate, isLoading: removeDelegateLoading } = useContractWrite(
         {
-            addressOrName: '0x469788fE6E9E9681C6ebF3bF78e7Fd26Fc015446',
+            addressOrName: process.env.NEXT_PUBLIC_APWINE_DELEGATE_REGISTRY_ADDRESS,
             contractInterface: delegateAbi,
         },
         'clearDelegate',
@@ -32,7 +32,7 @@ export default function Delegate({ delegate, currentDelegateAddress }) {
 
     const { write: setDelegate, isLoading: setDelegateLoading } = useContractWrite(
         {
-            addressOrName: '0x469788fE6E9E9681C6ebF3bF78e7Fd26Fc015446',
+            addressOrName: process.env.NEXT_PUBLIC_APWINE_DELEGATE_REGISTRY_ADDRESS,
             contractInterface: delegateAbi,
         },
         'setDelegate',
@@ -49,7 +49,7 @@ export default function Delegate({ delegate, currentDelegateAddress }) {
         address: delegate.address,
     })
     return (
-        <div className='flex flex-col max-w-md'>
+        <div className='flex flex-col max-w-sm'>
             <div className="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200">
             <div className="flex-1 flex flex-col p-8">
                 <div>

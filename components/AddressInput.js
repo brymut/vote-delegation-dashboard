@@ -10,10 +10,10 @@ import delegateAbi from '../utils/abis/delegate.json'
 export default function AddressInput() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [delegateAddress, setDelegateAddress] = useState(null)
-    const space = 'apwine.eth'
+    const space = process.env.NEXT_PUBLIC_APWINE_SPACE
     const { write, isLoading, error } = useContractWrite(
         {
-            addressOrName: '0x469788fE6E9E9681C6ebF3bF78e7Fd26Fc015446',
+            addressOrName: process.env.NEXT_PUBLIC_APWINE_DELEGATE_REGISTRY_ADDRESS,
             contractInterface: delegateAbi,
         },
         'setDelegate',
@@ -34,6 +34,7 @@ export default function AddressInput() {
             </label>
             <div className="mt-4">
                 <input
+                    type="text"
                     className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     {...register("address", { required: true, pattern: /^0x[a-fA-F0-9]{40}$/ })}
                     placeholder="0x0000000000000000000000000000000000000000"

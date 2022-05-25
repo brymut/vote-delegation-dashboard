@@ -16,18 +16,18 @@ export default function Home() {
   const { data: blockNumber } = useBlockNumber()
   const { data, isError, isLoading } = useBalance({
     addressOrName: account?.address,
-    token: '0xC5ca1EBF6e912E49A6a70Bb0385Ea065061a4F09',
+    token: process.env.NEXT_PUBLIC_VEAPW_TOKEN_ADDRESS,
     watch: true,
   })
 
-  const space = 'apwine.eth'
+  const space = process.env.NEXT_PUBLIC_APWINE_SPACE
   const strategies = [
     {
       name: 'erc20-balance-of-coeff',
       params: {
         coeff: 104,
-        address: '0xc5ca1ebf6e912e49a6a70bb0385ea065061a4f09',
-        symbol: 'veAPW',
+        address: process.env.NEXT_PUBLIC_VEAPW_TOKEN_ADDRESS,
+        symbol: process.env.NEXT_PUBLIC_VEAPW_TOKEN_SYMBOL,
         decimals: 18
       }
     }
@@ -55,7 +55,7 @@ export default function Home() {
 
   const { data: selectedDelegate } = useContractRead(
     {
-      addressOrName: '0x469788fE6E9E9681C6ebF3bF78e7Fd26Fc015446',
+      addressOrName: process.env.NEXT_PUBLIC_APWINE_DELEGATE_REGISTRY_ADDRESS,
       contractInterface: delegateAbi,
     },
     'delegation',
@@ -91,13 +91,13 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Voting Delegation Dashboard</title>
+        <title>APWINE - Voting Delegation Dashboard</title>
       </Head>
       <Navigation />
       <h1 className="text-2xl md:text-3xl font-bold font-serif mt-11 ml-5  md:ml-16 text-brand-dark-purple">
         Voting Delegation Dashboard
       </h1>
-      <div className="mt-11 ml-5 lg:flex justify-evenly">
+      <div className="mt-5 ml-5 lg:flex justify-evenly">
         {/* Token balance and voting power */}
         <div className="mt-11 ml-10 text-brand-dark-purple font-serif font-medium text-xl">
         {
@@ -117,9 +117,9 @@ export default function Home() {
         </div>
         {/* current delegate */}
         {currentDelegate === zeroAdddress ? (null) : (
-          <div >
-            <h2 className="font-serif font-bold text-2xl text-brand-indigo">Current Delegate:</h2>
-            <div className="mt-5 ml-2">
+          <div>
+            <h2 className="mt-5 md:mt-0 font-serif font-bold text-2xl text-brand-indigo">Current Delegate:</h2>
+            <div className="mt-5 mx-4">
               <Delegate delegate={currentDelegate} currentDelegateAddress={currentDelegate.address} />
             </div>
           </div>
