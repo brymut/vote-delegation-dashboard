@@ -8,9 +8,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'brand-light-purple': '#D6D8F7',
+        'brand-light-purple': '#e37ef2',
         'brand-dark-purple': '#312C7D',
-        'brand-indigo': '#C336D8',
+        'brand-indigo': '#c336d8',
         'brand-blue': '#4C53D6'
       },
       fontFamily: {

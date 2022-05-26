@@ -6,7 +6,7 @@ export const delegates = [
     discordId: 'Cool Guy 🍏#0311',
     twitter: 'adudeofcool',
     imageUrl:
-      'https://imgur.com/a/Cq9n0c2',
+      'https://i.imgur.com/vmzc4yo.jpeg',
   },
   {
     name: 'Starny',
@@ -15,7 +15,7 @@ export const delegates = [
     discordId: 'Starny#3390',
     twitter: 'StarnyDefi',
     imageUrl:
-      'https://imgur.com/a/uWec1sW',
+      'https://i.imgur.com/4P7Pak0.png',
   },
   {
     name: 'Jane Cooper',

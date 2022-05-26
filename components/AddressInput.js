@@ -29,10 +29,10 @@ export default function AddressInput() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="address" className="block text-sm font-medium text-gray-300">
                 Address
             </label>
-            <div className="mt-4">
+            <div className="mt-1">
                 <input
                     type="text"
                     className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -44,7 +44,7 @@ export default function AddressInput() {
             <br />
             <button
                 type="submit"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full justify-center inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-gray-100 bg-brand-indigo  hover:bg-brand-indigo/50  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
                 {isLoading ? "Setting Delegate" : "Set Delegate"}
             </button>

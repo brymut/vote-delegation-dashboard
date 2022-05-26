@@ -27,7 +27,7 @@ export default function Navigation() {
     const [showDisconnectText, setShowDisconnectText] = useState(false)
 
     return (
-        <Disclosure as="nav" className="bg-white/50 mx-10 md:mx-20 my-8 rounded-xl">
+        <Disclosure as="nav" className="bg-black/50 mx-10 md:mx-20 my-8 rounded-xl">
             {({ open }) => (
                 <>
                     <div className="mx-auto px-2 md:px-6 lg:px-8">
@@ -47,11 +47,11 @@ export default function Navigation() {
                                     <div className="block lg:hidden pt-2  w-auto">
                                         <Image src="/apw-logo-light-circle.png" alt="APWine Logo" width={50} height={50} />
                                     </div>
-                                    <div className="hidden lg:block  w-auto">
-                                        <Image src="/apw-text-transparent-color.png" alt="APWine Logo" width={175} height={42} />
+                                    <div className="hidden lg:block w-auto">
+                                        <Image src="/apw-text-transparent-white.png" alt="APWine Logo" width={155} height={39} />
                                     </div>
                                 </div>
-                                <div className="hidden md:block md:ml-6 pt-5 lg:pt-3">
+                                <div className="hidden md:block md:ml-6 pt-5 lg:pt-2">
                                     <div className="flex space-x-4">
                                         {navigation.map((item) => (
                                             <a
@@ -59,7 +59,7 @@ export default function Navigation() {
                                                 href={item.href}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="text-brand-purple hover:text-brand-indigo"
+                                                className=" text-gray-100 hover:text-brand-indigo"
                                                 aria-current={item.current ? 'page' : undefined}
                                             >
                                                 {item.name}
@@ -75,7 +75,7 @@ export default function Navigation() {
                                             <>
                                                 <button
                                                     type="button"
-                                                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                    className=" inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-gray-100 bg-brand-indigo  hover:bg-brand-indigo/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                     onClick={() => disconnect()}
                                                     onMouseEnter={() => setShowDisconnectText(true)}
                                                     onMouseLeave={() => setShowDisconnectText(false)}
@@ -100,7 +100,7 @@ export default function Navigation() {
                                             <>
                                                 <button
                                                     type="button"
-                                                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-gray-100 bg-brand-indigo  hover:bg-brand-indigo/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                     onClick={() => connect()}
                                                 >
                                                     <LinkIcon className="-ml-1 mr-3 h-5 w-5" aria-hidden="true" />
@@ -121,7 +121,7 @@ export default function Navigation() {
                                     as="a"
                                     href={item.href}
                                     className={classNames(
-                                        item.current ? 'bg-gray-900 text-white' : 'text-brand-purple hover:text-brand-indigo',
+                                        item.current ? 'bg-gray-900 text-gray-100' : 'text-gray-100 hover:text-brand-indigo',
                                         'block px-3 py-2 rounded-md text-base font-medium'
                                     )}
                                     aria-current={item.current ? 'page' : undefined}
@@ -135,7 +135,7 @@ export default function Navigation() {
                                         <>
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                className="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-gray-100 bg-brand-indigo  hover:bg-brand-indigo/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                 onClick={() => disconnect()}
                                                 onMouseEnter={() => setShowDisconnectText(true)}
                                                 onMouseLeave={() => setShowDisconnectText(false)}

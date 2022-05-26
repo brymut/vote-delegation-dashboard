@@ -89,27 +89,27 @@ export default function Home() {
   }, [selectedDelegate])
 
   return (
-    <>
+    <div className='transition-all duration-300 filter grayscale-2/3'>
       <Head>
         <title>APWINE - Voting Delegation Dashboard</title>
       </Head>
       <Navigation />
-      <h1 className="text-xl md:text-2xl font-bold font-serif mx-10  md:mx-20 text-brand-dark-purple">
+      <h1 className="text-xl md:text-3xl font-bold font-serif mx-10  md:mx-20 text-gray-100">
         Voting Delegation Dashboard
       </h1>
       <div className="mt-5 mx-10 md:mx-20 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
         {/* Token balance and voting power */}
-        <div className="mt-11 text-brand-dark-purple font-serif font-medium text-xl">
+        <div className="mt-11 text-gray-100 font-serif font-medium text-xl">
         {
           isLoading ?
             (
-              <span className="text-brand-indigo font-bold">Fetching balance...</span>
+              <span className="text-brand-light-purple font-bold">Fetching balance...</span>
             ) : isError ? (
-              <span className="text-brand-indigo font-bold">Error fetching balance</span>
+              <span className="text-brand-light-purple font-bold">Error fetching balance</span>
             ) : (
               <>
-                    <h3>veAPW balance: <span className="text-brand-indigo font-bold">{parseFloat(data?.formatted).toFixed(2)} {data?.symbol}</span></h3>
-                    <h3>veAPW voting power: <span className="text-brand-indigo font-bold">{parseFloat(votes).toFixed(2)} votes</span></h3>
+                    <h3>veAPW balance: <span className="text-brand-light-purple font-bold">{parseFloat(data?.formatted).toFixed(2)} {data?.symbol}</span></h3>
+                    <h3>veAPW voting power: <span className="text-brand-light-purple font-bold">{parseFloat(votes).toFixed(2)} votes</span></h3>
               </>
             )
         }
@@ -118,7 +118,7 @@ export default function Home() {
         {/* current delegate */}
         {currentDelegate === zeroAdddress ? (null) : (
           <div>
-            <h2 className="mt-5 md:mt-0 font-serif font-bold text-xl text-brand-indigo">Current Delegate:</h2>
+            <h2 className="mt-5 md:mt-0 font-serif font-bold text-xl text-gray-100">Current Delegate:</h2>
             <div className="mt-5">
               <Delegate delegate={currentDelegate} currentDelegateAddress={currentDelegate.address} />
             </div>
@@ -127,8 +127,8 @@ export default function Home() {
         }
 
         {/* select delegate by address */}
-        <div className="mt-11 md:mt-0">
-          <h2 className="font-serif font-bold text-xl text-brand-indigo">Select Delegate by Address:</h2>
+        <div className="mt-11 md:mt-0 max-w-sm">
+          <h2 className="font-serif font-bold text-xl text-gray-100">Select Delegate by Address:</h2>
           <div className="mt-2 md:mt-5">
             <AddressInput />
           </div>
@@ -136,7 +136,7 @@ export default function Home() {
       </div>
       {/* Candidate delegates */}
       <div className="mt-6 mx-10 md:mx-20">
-        <h2 className="font-serif font-bold text-xl text-brand-indigo">Candidate Delegates:</h2>
+        <h2 className="font-serif font-bold text-xl text-gray-100">Candidate Delegates:</h2>
         <div className="mt-2">
           <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
             {delegates.map((delegate) => (
@@ -148,6 +148,6 @@ export default function Home() {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
