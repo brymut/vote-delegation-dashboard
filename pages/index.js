@@ -94,10 +94,10 @@ export default function Home() {
         <title>APWINE - Voting Delegation Dashboard</title>
       </Head>
       <Navigation />
-      <h1 className="text-xl md:text-2xl font-bold font-serif ml-5  md:ml-16 text-brand-dark-purple">
+      <h1 className="text-xl md:text-2xl font-bold font-serif mx-10  md:mx-20 text-brand-dark-purple">
         Voting Delegation Dashboard
       </h1>
-      <div className="mt-5 lg:flex justify-evenly">
+      <div className="mt-5 mx-10 md:mx-20 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
         {/* Token balance and voting power */}
         <div className="mt-11 text-brand-dark-purple font-serif font-medium text-xl">
         {
@@ -119,7 +119,7 @@ export default function Home() {
         {currentDelegate === zeroAdddress ? (null) : (
           <div>
             <h2 className="mt-5 md:mt-0 font-serif font-bold text-xl text-brand-indigo">Current Delegate:</h2>
-            <div className="mt-5 mx-4">
+            <div className="mt-5">
               <Delegate delegate={currentDelegate} currentDelegateAddress={currentDelegate.address} />
             </div>
           </div>
@@ -127,17 +127,17 @@ export default function Home() {
         }
 
         {/* select delegate by address */}
-        <div className={`mt-11 md:mt-0 ${currentDelegate === zeroAdddress ? '' : 'md:ml-12'}`}>
+        <div className="mt-11 md:mt-0">
           <h2 className="font-serif font-bold text-xl text-brand-indigo">Select Delegate by Address:</h2>
-          <div className="mt-2 md:mt-5 md:ml-2">
+          <div className="mt-2 md:mt-5">
             <AddressInput />
           </div>
         </div>
       </div>
       {/* Candidate delegates */}
-      <div className=" mt-6 ml-5 md:ml-14">
+      <div className="mt-6 mx-10 md:mx-20">
         <h2 className="font-serif font-bold text-xl text-brand-indigo">Candidate Delegates:</h2>
-        <div className="mt-2 mx-5 md:mx-14">
+        <div className="mt-2">
           <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
             {delegates.map((delegate) => (
               <li key={delegate.address}>
