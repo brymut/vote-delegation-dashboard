@@ -94,7 +94,7 @@ export default function Home() {
         <title>APWINE - Voting Delegation Dashboard</title>
       </Head>
       <Navigation />
-      <h1 className="text-xl md:text-2xl font-bold font-serif mx-10  md:mx-20 text-gray-100">
+      <h1 className="text-xl md:text-2xl font-bold font-serif mx-10  md:mx-20 text-gray-100 text-center">
         Voting Delegation Dashboard
       </h1>
       <div className="mt-5 mx-10 md:mx-20 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
@@ -136,7 +136,7 @@ export default function Home() {
       </div>
       {/* Candidate delegates */}
       <div className="mt-6 mx-10 md:mx-20">
-        <h2 className="font-serif font-bold text-xl text-gray-100">Candidate Delegates:</h2>
+        <h2 className="font-serif font-bold text-xl text-gray-100 text-center">Candidate Delegates:</h2>
         <div className="mt-2">
           <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
             {delegates.map((delegate) => (
