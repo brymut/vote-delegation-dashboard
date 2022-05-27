@@ -35,7 +35,7 @@ export default function AddressInput() {
             <div className="mt-1">
                 <input
                     type="text"
-                    className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-96 text-xs border-gray-300 rounded-md "
                     {...register("address", { required: true, pattern: /^0x[a-fA-F0-9]{40}$/ })}
                     placeholder="0x0000000000000000000000000000000000000000"
                 />

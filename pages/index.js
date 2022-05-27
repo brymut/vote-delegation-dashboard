@@ -163,7 +163,7 @@ export default function Home() {
         }
 
         {/* select delegate by address */}
-        <div className="mt-11 md:mt-0 max-w-md">
+        <div className="mt-11 md:mt-0">
           <h2 className="font-serif font-bold text-xl text-gray-100">Select Delegate by Address:</h2>
           <div className="mt-2 md:mt-5">
             <AddressInput />
