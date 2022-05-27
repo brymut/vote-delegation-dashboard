@@ -131,7 +131,9 @@ export default function Home() {
       </h1>
       <div className="mt-5 mx-10 md:mx-20 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 justify-items-center">
         {/* Token balance and voting power */}
-        <div className="mt-11 text-gray-100 font-serif font-medium text-xl">
+        
+        <div className="text-gray-100 font-serif font-medium text-xl">
+        <h2 className="md:mt-0 font-serif font-bold text-xl text-gray-100">Current Voting Power:</h2>
         {
           (tApwBalanceLoading || veApwBalanceLoading) ?
             (
@@ -139,12 +141,12 @@ export default function Home() {
             ) : (veApwBalanceError || tApwBalanceError) ? (
               <span className="text-brand-light-purple font-bold">Error fetching balance</span>
             ) : (
-              <>
+              <div className='mt-5'>
                     <h3>veAPW balance: <span className="text-brand-light-purple font-bold">{parseFloat(veApwBalance?.formatted).toFixed(2)} {veApwBalance?.symbol}</span></h3>
                     <h3>veAPW voting power: <span className="text-brand-light-purple font-bold">{parseFloat(veApwVotes).toFixed(2)} votes</span></h3>
                     <h3>tAPW balance: <span className="text-brand-light-purple font-bold">{parseFloat(tApwBalance?.formatted).toFixed(2)} {tApwBalance?.symbol}</span></h3>
                     <h3>tAPW voting power: <span className="text-brand-light-purple font-bold">{parseFloat(tApwVotes).toFixed(2)} votes</span></h3>
-              </>
+              </div>
             )
         }
 
