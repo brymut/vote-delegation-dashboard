@@ -14,14 +14,20 @@ import { delegates } from '../delegates'
 export default function Home() {
   const { data: account } = useAccount()
   const { data: blockNumber } = useBlockNumber()
-  const { data, isError, isLoading } = useBalance({
+  const { data: veApwBalance, isError: veApwBalanceError, isLoading: veApwBalanceLoading } = useBalance({
     addressOrName: account?.address,
     token: process.env.NEXT_PUBLIC_VEAPW_TOKEN_ADDRESS,
     watch: true,
   })
 
+  const { data: tApwBalance, isError: tApwBalanceError, isLoading: tApwBalanceLoading } = useBalance({
+    addressOrName: account?.address,
+    token: process.env.NEXT_PUBLIC_TAPW_TOKEN_ADDRESS,
+    watch: true,
+  })
+
   const space = process.env.NEXT_PUBLIC_APWINE_SPACE
-  const strategies = [
+  const veApwStrategy = [
     {
       name: 'erc20-balance-of-coeff',
       params: {
@@ -32,24 +38,50 @@ export default function Home() {
       }
     }
   ];
+
+  const tApwStrategy = [
+    {
+      name: 'erc20-balance-of-coeff',
+      params: {
+        coeff: 1,
+        address: process.env.NEXT_PUBLIC_TAPW_TOKEN_ADDRESS,
+        symbol: process.env.NEXT_PUBLIC_TAPW_TOKEN_SYMBOL,
+        decimals: 18
+      }
+    }
+  ];
   const network = '1';
   const voters = [
     account?.address,
   ];
   const zeroAdddress = '0x0000000000000000000000000000000000000000'
-  const [votes, setVotes] = useState()
+  const [veApwVotes, setVeApwVotes] = useState()
+  const [tApwVotes, setTApwVotes] = useState()
   const [currentDelegate, setCurrentDelegate] = useState(zeroAdddress)
 
   useEffect(() => {
     if (account)
       snapshot.utils.getScores(
         space,
-        strategies,
+        veApwStrategy,
         network,
         voters,
         blockNumber
       ).then(scores => {
-        setVotes(scores[0][account?.address] || 0)
+        setVeApwVotes(scores[0][account?.address] || 0)
+      });
+  }, [voters, account])
+
+  useEffect(() => {
+    if (account)
+      snapshot.utils.getScores(
+        space,
+        tApwStrategy,
+        network,
+        voters,
+        blockNumber
+      ).then(scores => {
+        setTApwVotes(scores[0][account?.address] || 0)
       });
   }, [voters, account])
 
@@ -97,19 +129,21 @@ export default function Home() {
       <h1 className="text-xl md:text-2xl font-bold font-serif mx-10  md:mx-20 text-gray-100 text-center">
         Voting Delegation Dashboard
       </h1>
-      <div className="mt-5 mx-10 md:mx-20 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+      <div className="mt-5 mx-10 md:mx-20 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 justify-items-center">
         {/* Token balance and voting power */}
         <div className="mt-11 text-gray-100 font-serif font-medium text-xl">
         {
-          isLoading ?
+          (tApwBalanceLoading || veApwBalanceLoading) ?
             (
               <span className="text-brand-light-purple font-bold">Fetching balance...</span>
-            ) : isError ? (
+            ) : (veApwBalanceError || tApwBalanceError) ? (
               <span className="text-brand-light-purple font-bold">Error fetching balance</span>
             ) : (
               <>
-                    <h3>veAPW balance: <span className="text-brand-light-purple font-bold">{parseFloat(data?.formatted).toFixed(2)} {data?.symbol}</span></h3>
-                    <h3>veAPW voting power: <span className="text-brand-light-purple font-bold">{parseFloat(votes).toFixed(2)} votes</span></h3>
+                    <h3>veAPW balance: <span className="text-brand-light-purple font-bold">{parseFloat(veApwBalance?.formatted).toFixed(2)} {veApwBalance?.symbol}</span></h3>
+                    <h3>veAPW voting power: <span className="text-brand-light-purple font-bold">{parseFloat(veApwVotes).toFixed(2)} votes</span></h3>
+                    <h3>tAPW balance: <span className="text-brand-light-purple font-bold">{parseFloat(tApwBalance?.formatted).toFixed(2)} {tApwBalance?.symbol}</span></h3>
+                    <h3>tAPW voting power: <span className="text-brand-light-purple font-bold">{parseFloat(tApwVotes).toFixed(2)} votes</span></h3>
               </>
             )
         }
@@ -127,7 +161,7 @@ export default function Home() {
         }
 
         {/* select delegate by address */}
-        <div className="mt-11 md:mt-0 max-w-sm">
+        <div className="mt-11 md:mt-0 max-w-md">
           <h2 className="font-serif font-bold text-xl text-gray-100">Select Delegate by Address:</h2>
           <div className="mt-2 md:mt-5">
             <AddressInput />
@@ -138,7 +172,7 @@ export default function Home() {
       <div className="mt-6 mx-10 md:mx-20">
         <h2 className="font-serif font-bold text-2xl text-gray-100 text-center">Candidate Delegates:</h2>
         <div className="mt-2">
-          <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+          <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 justify-items-center">
             {delegates.map((delegate) => (
               <li key={delegate.address}>
                 <Delegate delegate={delegate} currentDelegateAddress={currentDelegate.address} />
